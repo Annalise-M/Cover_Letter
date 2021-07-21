@@ -1,15 +1,19 @@
 import * as THREE from 'three';
-import { Canvas, extend } from '@react-three/fiber';
+import React, { useRef, Suspense } from 'react';
+import { Canvas, extend, useFrame } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import glsl from 'babel-plugin-glsl/macro';
 import './App.css';
 
 const WaveShaderMaterial = shaderMaterial(
-  // Uniform {RGB = default of black}
-  { uColor: new THREE.Color(0.0, 0.0, 0.0) },
+  // Uniform {RGB = default setting @ black}
+  { uTime: 0, 
+    uColor: new THREE.Color(0.0, 0.0, 0.0) 
+  },
 
   // Vertex Shader
   glsl`
+    precision mediump float;
     varying vec2 vUv;
 
     void main() {
@@ -21,12 +25,15 @@ const WaveShaderMaterial = shaderMaterial(
 
   // Fragment Shader
   glsl`
-    uniform vec3 uColor;
+    precision mediump float;
 
+    uniform vec3 uColor;
+    uniform float uTime;
+    
     varying vec2 vUv;
 
     void main() {
-      gl_FragColor = vec4(vUv.x * uColor, 1.0);
+      gl_FragColor = vec4(sin(vUv.x + uTime) * uColor, 1.0);
     }
   `
 );
@@ -34,15 +41,25 @@ const WaveShaderMaterial = shaderMaterial(
 // allows the WaveShaderMaterial as a jsx comonent
 extend({ WaveShaderMaterial });
 
+const Wave = () => {
+  const ref = useRef();
+  useFrame(({ clock }) => (ref.current.uTime = clock.getElapsedTime()));
+
+  return (
+    <mesh>
+      <planeBufferGeometry args={[3, 5]} />
+      <waveShaderMaterial uColor={'hotpink'} ref={ref} />
+    </mesh>
+  )
+}
+
 const Scene = () => {
   return (
     <Canvas>
-      {/* Replicating placement of RGB */}
-      <pointLight position={[10, 10, 10]} />
-      <mesh>
-        <planeBufferGeometry args={[3, 5]} />
-        <waveShaderMaterial uColor={'hotpink'}/>
-      </mesh>
+      <Suspense fallback={null}>
+        <Wave />
+      </Suspense>
+
     </Canvas>
   );
 };
