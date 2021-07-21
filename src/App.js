@@ -33,7 +33,7 @@ const WaveShaderMaterial = shaderMaterial(
     varying vec2 vUv;
 
     void main() {
-      gl_FragColor = vec4(sin(vUv.x + uTime) * uColor, 1.0);
+      gl_FragColor = vec4(sin(vUv.y + uTime) * uColor, 1.0);
     }
   `
 );
@@ -47,15 +47,16 @@ const Wave = () => {
 
   return (
     <mesh>
-      <planeBufferGeometry args={[3, 5]} />
-      <waveShaderMaterial uColor={'hotpink'} ref={ref} />
+      <planeBufferGeometry args={[0.4, 0.6, 16, 16]} />
+      <waveShaderMaterial uColor={'hotpink'} ref={ref} wireframe />
     </mesh>
   )
 }
 
 const Scene = () => {
   return (
-    <Canvas>
+    // fov = field of position
+    <Canvas camera={{ fov: 5.78, position: [0, 0, 5] }}>
       <Suspense fallback={null}>
         <Wave />
       </Suspense>
