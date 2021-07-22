@@ -90,7 +90,7 @@ const Scene = () => {
 const App = () => {
   return (
    <>
-    <h1>WELCOME TO MY RESUME</h1>
+    <h1>WELCOME TO MY COVER LETTER</h1>
     <Scene />
    </>
   );
