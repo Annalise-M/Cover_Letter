@@ -4,7 +4,7 @@ import { Canvas, extend, useFrame, useLoader } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import glsl from 'babel-plugin-glsl/macro';
 import './App.scss';
-import ResumeMap from './images/AM_Resume.png';
+import ResumeMap from './images/Standard_CV.jpg';
 
 const WaveShaderMaterial = shaderMaterial(
   // Uniform {RGB = default setting @ black}
@@ -79,7 +79,7 @@ const Wave = () => {
 const Scene = () => {
   return (
     // fov = field of position
-    <Canvas camera={{ fov: 9, position: [0, 0, 3] }}>
+    <Canvas camera={{ fov: 8.7, position: [0, 0, 3] }}>
       <Suspense fallback={null}>
         <Wave />
       </Suspense>
