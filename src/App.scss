@@ -1,32 +1,32 @@
 // Build is all thanks to React & Three.js | Working with Shaders using React Three Fiber @ Wrong Akram \\
 
-@function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
-}
+// @function strip-unit($value) {
+//   @return $value / ($value * 0 + 1);
+// }
 
-@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
-  $u1: unit($min-vw);
-  $u2: unit($max-vw);
-  $u3: unit($min-font-size);
-  $u4: unit($max-font-size);
+// @mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+//   $u1: unit($min-vw);
+//   $u2: unit($max-vw);
+//   $u3: unit($min-font-size);
+//   $u4: unit($max-font-size);
 
-  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
-    & {
-      font-size: $min-font-size;
-      @media screen and (min-width: $min-vw) {
-        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-      }
-      @media screen and (min-width: $max-vw) {
-        font-size: $max-font-size;
-      } 
-    }
-  }
-}
+//   @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+//     & {
+//       font-size: $min-font-size;
+//       @media screen and (min-width: $min-vw) {
+//         font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+//       }
+//       @media screen and (min-width: $max-vw) {
+//         font-size: $max-font-size;
+//       } 
+//     }
+//   }
+// }
 
-$min_width: 320px;
-$max_width: 1200px;
-$min_font: 16px;
-$max_font: 24px;
+// $min_width: 320px;
+// $max_width: 1200px;
+// $min_font: 16px;
+// $max_font: 24px;
 
 
 * {
@@ -37,14 +37,15 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
-  padding: 0;
+  // padding: 0;
 }
 
 body {
   background: #010113;
   font-family: "Avenir", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  height: 100vh;
 }
 
 h1 {
@@ -56,7 +57,11 @@ h1 {
   transform: translate(-50%, -50%);
   z-index: 1;
   font-size: 4rem;
-  font-weight: 900;
+  font-weight: 780;
   letter-spacing: 0.04em;
   white-space: nowrap;
+}
+
+canvas {
+  display: block;
 }
