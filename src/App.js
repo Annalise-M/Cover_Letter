@@ -5,7 +5,7 @@ import { shaderMaterial } from '@react-three/drei';
 import glsl from 'babel-plugin-glsl/macro';
 import CoverLetter from './images/Standard_CoverLetter.jpg';
 import './App.scss';
-import { PerspectiveCamera } from 'three';
+// import { PerspectiveCamera } from 'three';
 
 
 export const WaveShaderMaterial = shaderMaterial(
@@ -108,12 +108,12 @@ const Wave = () => {
   
 
   return (
-    <PerspectiveCamera makeDefault>
+    <camera makeDefault>
       <mesh>
         <planeBufferGeometry args={[0.4, 0.6, 16, 16]} />
         <waveShaderMaterial uColor={'hotpink'} ref={ref} uTexture={image}/>
       </mesh>
-    </PerspectiveCamera>
+    </camera>
   )
 }
 

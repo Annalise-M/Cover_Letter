@@ -87,16 +87,26 @@ function moveCamera() {
 
 scene.add(moveCamera);
 
+// Animate function needed for stopping obj movement based off of users click.e ===> .update || .stopAllAction(): AnimationMixer
 
 // Animate
 function animate() {
   requestAnimationFrame( animate );
 
-  torus.rotation.x += 0.01;
-  torus.rotation.y += 0.005;
-  torus.rotation.z += 0.01;
+  // if (animate === true) {
+    torus.rotation.x += 0.01;
+    torus.rotation.y += 0.005;
+    torus.rotation.z += 0.01;
 
-  controls.update();
+    controls.addEventListener();
+    controls.update();
+  // } else {
+    // torus.rotation.x += 0.0;
+    // torus.rotation.y += 0.0;
+    // torus.rotation.z += 0.0;
+  
+    // controls.update();
+  // }
 
   renderer.render( scene, camera );
 };
@@ -106,7 +116,10 @@ animate();
 const App2 = () => {
     return (
       <div>
-        <canvas id="bg">
+        <canvas 
+        // value="animate"
+          
+        id="bg">
         </canvas> 
       </div>
     )
