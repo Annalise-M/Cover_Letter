@@ -1,13 +1,12 @@
 import * as THREE from 'three';
 import React, { useRef, Suspense } from 'react';
-// import { useSpring, a } from '@react-spring/three';
 import { Canvas, extend, useFrame, useLoader } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import glsl from 'babel-plugin-glsl/macro';
 import CoverLetter from './images/Standard_CoverLetter.jpg';
 import './App.scss';
 import { PerspectiveCamera } from 'three';
-// import { render } from '@testing-library/react';
+
 
 const WaveShaderMaterial = shaderMaterial(
   // Uniform {RGB = default setting @ black}
@@ -73,12 +72,17 @@ const Wave = () => {
 
 
   const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 5;
-  camera.position.y = 0.7;
-  camera.position.x = 0.7;
+  // camera.position.z = 5;
+  // camera.position.y = 0.7;
+  // camera.position.x = 0.7;
 
   const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  renderer.setPixelRatio( window.devicePixelRatio );
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  camera.position.setZ(30);
+
+  renderer.render( scene, camera );
 
   const animate = function () {
     requestAnimationFrame(animate);
@@ -88,21 +92,13 @@ const Wave = () => {
   };
   animate();
   
-
-  // document.body.appendChild(renderer.domElement);
-  // window.addEventListener('resize', () => {
-  //   renderer.setSize(window.innerWidth, window.innerHeight);
-  //   camera.aspect = window.innerWidth / window.innerHeight;
-
-  //   camera.updateProjectionMatrix();
-  // })
-  
   
   const ref = useRef();
   useFrame(({ clock }) => (ref.current.uTime = clock.getElapsedTime()));
 
-  const mesh = useRef();
-  useFrame(() => (mesh.current.position.x = mesh.current.position.y));
+  const mesh = new THREE.Mesh();
+  // const mesh = useRef();
+  // useFrame(() => (mesh.current.position.x = mesh.current.position.y));
 
   const [image] = useLoader(THREE.TextureLoader, [CoverLetter],
   );
@@ -110,10 +106,6 @@ const Wave = () => {
 
   scene.add(mesh);
   
-  // const [expand, setExpand] = useState(false);
-  // const props = useSpring({
-  //   scale: expand ? [4.4, 4.4, 4.4] : [1, 1, 1],
-  // });
 
   return (
     <PerspectiveCamera
