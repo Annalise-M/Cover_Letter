@@ -2,6 +2,7 @@ import React from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App2.css';
+import hero1 from './images/hero1.jpeg';
 
 // ===> Think about custom hook / call for id
 // ie. const bg = React.createElement() || .createRef();
@@ -60,6 +61,9 @@ function addStars() {
 }
 
 Array(200).fill().forEach(addStars);
+
+const spaceTexture = new THREE.TextureLoader().load(hero1);
+scene.background = spaceTexture;
 
 
 // Animate
