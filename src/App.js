@@ -8,7 +8,7 @@ import './App.scss';
 import { PerspectiveCamera } from 'three';
 
 
-const WaveShaderMaterial = shaderMaterial(
+export const WaveShaderMaterial = shaderMaterial(
   // Uniform {RGB = default setting @ black}
   { uTime: 0, 
     uColor: new THREE.Color(0.0, 0.0, 0.0),
@@ -108,13 +108,8 @@ const Wave = () => {
   
 
   return (
-    <PerspectiveCamera
-      makeDefault
-    >
-      <mesh
-      // onClick={() => setExpand(!expand)}
-      // scale={props.scale}
-      >
+    <PerspectiveCamera makeDefault>
+      <mesh>
         <planeBufferGeometry args={[0.4, 0.6, 16, 16]} />
         <waveShaderMaterial uColor={'hotpink'} ref={ref} uTexture={image}/>
       </mesh>
