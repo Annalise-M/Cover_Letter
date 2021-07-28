@@ -4,9 +4,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App2.css';
 import hero1 from './images/hero1.jpeg';
 
-// ===> Think about custom hook / call for id
-// ie. const bg = React.createElement() || .createRef();
-
 
 // 1. SCENE == container
 const scene = new THREE.Scene();
@@ -22,19 +19,23 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight );
 camera.position.setZ(30);
+camera.position.setX(-3);
+
+renderer.render(scene, camera);
 
 // Now add an object to it
 const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
 
-// Then the material to the object
+// Material to the object
 const material = new THREE.MeshStandardMaterial( { color: 0xFF6347 } );
 
-// Then creating the mesh = geometry + material
+// Mesh = geometry + material
 const torus = new THREE.Mesh( geometry, material );
 
 scene.add(torus);
 
-// Lighting instantiated here
+
+// Lighting - instantiated here
 const pointLight = new THREE.PointLight(0xffffff);
 pointLight.position.set(5, 5, 5);
 
@@ -44,6 +45,7 @@ scene.add(pointLight, ambientLight);
 const lightHelper = new THREE.PointLightHelper(pointLight);
 const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper);
+
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -64,6 +66,26 @@ Array(200).fill().forEach(addStars);
 
 const spaceTexture = new THREE.TextureLoader().load(hero1);
 scene.background = spaceTexture;
+
+
+// Event handler on scroll event for user
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top;
+
+  // obj.rotation.x += ;
+  // obj.rotation.y += ;
+  // obj.rotation.z += ;
+
+  // otherObj.rotation.x += ;
+  // otherObj.rotation.y += ;
+  // otherObj.rotation.z += ;
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.position.y = t * -0.0002;
+};
+
+scene.add(moveCamera);
 
 
 // Animate
