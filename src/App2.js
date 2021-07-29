@@ -8,10 +8,12 @@ import hero1 from './images/hero1.jpeg';
 // 1. SCENE == container
 const scene = new THREE.Scene();
 
+// CANVAS ???
+
 // 2. CAMERA
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-// 3. RENDERER == makes the magic happen ( to render out the actual graphics to the scene )
+// 3. RENDERER
 const renderer = new THREE.WebGLRenderer({
   canvas: document.querySelector('#bg'),
 });
@@ -23,8 +25,8 @@ camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
-// Now add an object to it
-const geometry = new THREE.TorusGeometry( 10, 3, 16, 100 );
+// Object 
+const geometry = new THREE.PlaneGeometry( 22, 30, 22, 22 );
 
 // Material to the object
 const material = new THREE.MeshStandardMaterial( { color: 0xFF6347 } );
@@ -68,7 +70,7 @@ const spaceTexture = new THREE.TextureLoader().load(hero1);
 scene.background = spaceTexture;
 
 
-// Event handler on scroll event for user
+// CAMERA
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
 
@@ -98,7 +100,7 @@ function animate() {
     torus.rotation.y += 0.005;
     torus.rotation.z += 0.01;
 
-    controls.addEventListener();
+    // controls.addEventListener();
     controls.update();
   // } else {
     // torus.rotation.x += 0.0;
