@@ -5,7 +5,6 @@ import { shaderMaterial } from '@react-three/drei';
 import glsl from 'babel-plugin-glsl/macro';
 import CoverLetter from './images/Standard_CoverLetter.jpg';
 import './App.scss';
-// import { PerspectiveCamera } from 'three';
 
 
 export const WaveShaderMaterial = shaderMaterial(
@@ -92,7 +91,7 @@ const Wave = () => {
   };
   animate();
   
-  
+  ////
   const ref = useRef();
   useFrame(({ clock }) => (ref.current.uTime = clock.getElapsedTime()));
 
@@ -100,15 +99,15 @@ const Wave = () => {
   // const mesh = useRef();
   // useFrame(() => (mesh.current.position.x = mesh.current.position.y));
 
-  const [image] = useLoader(THREE.TextureLoader, [CoverLetter],
+  const [image] = useLoader(THREE.TextureLoader, [CoverLetter]
   );
 
 
   scene.add(mesh);
-  
+  ////
 
   return (
-    <camera makeDefault>
+    <camera>
       <mesh>
         <planeBufferGeometry args={[0.4, 0.6, 16, 16]} />
         <waveShaderMaterial uColor={'hotpink'} ref={ref} uTexture={image}/>
@@ -132,7 +131,7 @@ const Scene = () => {
 };
 
 
-const App = () => {
+export const WaveCV = () => {
   return (
    <>
     <h1>WELCOME TO MY COVER LETTER</h1>
@@ -141,4 +140,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default WaveCV;
