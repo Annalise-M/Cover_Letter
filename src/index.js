@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App2 from './App2';
+// import { ThreejsJourny } from './threejs-journy.js';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <App2 />
+    {/* <ThreejsJourny /> */}
+    <canvas className="canvas" />
   </React.StrictMode>,
   document.getElementById('root')
 );
